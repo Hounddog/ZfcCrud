@@ -1,6 +1,6 @@
 <?php
 
-namespace RestCrudDoctrineModule\Mapper;
+namespace ZfcCrud\Mapper;
 
 use Doctrine\ORM\EntityManager;
 use Zend\Stdlib\Hydrator\HydratorInterface;
@@ -12,6 +12,9 @@ abstract class AbstractDBMapper
      */
     protected $em;
 
+    /**
+     * @var string
+     */
     protected $entityClassName;
 
     public function __construct(EntityManager $em, $entityClassName)
@@ -37,7 +40,11 @@ abstract class AbstractDBMapper
     public function findById($id)
     {
         $er = $this->em->getRepository($this->entityClassName);
-        return $er->find($id);
+        $entity = $er->find($id);
+        if(null === $entity) {
+
+        }
+        return $entity; 
     }
 
     public function insert($entity)
